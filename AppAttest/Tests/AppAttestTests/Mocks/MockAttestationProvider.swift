@@ -32,4 +32,16 @@ final class MockAttestationProvider: AttestationProvider {
 
         return Data("attestation_object".utf8)
     }
+    
+    func generateAssertion(
+        _ keyID: String,
+        clientDataHash: Data
+    ) async throws -> Data {
+        didAttestKey = true
+        challengeUsedForAttest = clientDataHash
+
+        #expect(keyID == self.keyID)
+
+        return Data("attestation_object".utf8)
+    }
 }
